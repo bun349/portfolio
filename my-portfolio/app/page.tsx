@@ -5,9 +5,10 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import {
   SiPython, SiReact, SiNextdotjs, SiTailwindcss,
-  SiPytorch, SiUnity, SiBlender, SiMysql, SiSupabase, SiNodedotjs
+  SiPytorch, SiUnity, SiBlender, SiMysql, SiSupabase, SiNodedotjs,
+  SiGithub, SiInstagram
 } from "react-icons/si";
-import { Sparkles, Code2, Layers, BrainCircuit, Map, ArrowRight } from "lucide-react";
+import { Sparkles, Code2, Layers, BrainCircuit, Map, ArrowRight, ExternalLink } from "lucide-react";
 
 const techStack = [
   { name: "Python", icon: <SiPython className="w-6 h-6" /> },
@@ -22,15 +23,15 @@ const techStack = [
   { name: "Blender", icon: <SiBlender className="w-6 h-6" /> },
 ];
 
-// Project Highlight — hanya 2 proyek unggulan
+// Project Highlight
 const highlightedProjects = [
   {
     title: "Commulab (Tutor AI)",
     description: "Patient counseling simulator with a microservices architecture. Integrates IndoBERT, Gemini API, ElevenLabs TTS, and Rhubarb Lip Sync.",
     tech: ["REACT", "NODE.JS", "FASTAPI", "INDOBERT"],
     icon: <BrainCircuit className="w-6 h-6" />,
-    // Pastikan file ini ada di folder public
     image: "/assets/projects/commulab.jpg",
+    link: "#", // Placeholder project link
   },
   {
     title: "ARAHIN (Transit Navigation)",
@@ -38,6 +39,7 @@ const highlightedProjects = [
     tech: ["VITE REACT", "EXPRESS", "DOCKER"],
     icon: <Map className="w-6 h-6" />,
     image: "/assets/projects/arahin.jpg",
+    link: "#", // Placeholder project link
   },
 ];
 
@@ -83,7 +85,6 @@ function HighlightCard({ project, index }: { project: typeof highlightedProjects
         }}
       />
 
-      {/* Wadah foto proyek */}
       <div className="w-full md:w-5/12 h-56 md:h-64 bg-neutral-950 rounded-2xl overflow-hidden border border-neutral-800 relative shrink-0 z-10 group-hover:border-blue-900/40 transition-colors">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-emerald-500/10 mix-blend-overlay group-hover:opacity-0 transition-opacity z-10"></div>
         <div className="absolute inset-0 bg-neutral-800 flex items-center justify-center text-neutral-600 text-sm font-mono z-0">
@@ -110,11 +111,11 @@ function HighlightCard({ project, index }: { project: typeof highlightedProjects
           </motion.div>
         </div>
 
-        <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-8 max-w-lg">
+        <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-6 max-w-lg">
           {project.description}
         </p>
 
-        <div className="flex flex-wrap gap-2 mt-auto">
+        <div className="flex flex-wrap gap-2 mb-6">
           {project.tech.map((tech, i) => (
             <span
               key={i}
@@ -123,6 +124,17 @@ function HighlightCard({ project, index }: { project: typeof highlightedProjects
               {tech}
             </span>
           ))}
+        </div>
+
+        <div className="mt-auto">
+          <a 
+            href={project.link} 
+            target="_blank" 
+            rel="noreferrer" 
+            className="inline-flex items-center gap-2 text-sm font-mono text-neutral-400 hover:text-emerald-400 transition-colors group/link"
+          >
+            View Project <ExternalLink className="w-4 h-4 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+          </a>
         </div>
       </div>
     </motion.div>
@@ -169,7 +181,7 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white mb-6">
             Bunga{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-cyan-400 to-emerald-500 bg-[length:200%_auto] animate-[gradientShift_4s_ease_infinite]">
-              Adlyna.
+              Adlyna
             </span>
           </h1>
 
@@ -178,11 +190,11 @@ export default function Home() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-6 font-mono text-sm">
-            <motion.a whileHover={{ y: -2 }} href="https://github.com/bun1110" target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-emerald-400 transition-colors">
-              [GitHub]
+            <motion.a whileHover={{ y: -2 }} href="https://github.com/bun1110" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+              <SiGithub className="w-5 h-5" /> GitHub
             </motion.a>
-            <motion.a whileHover={{ y: -2 }} href="https://instagram.com/username-kamu" target="_blank" rel="noreferrer" className="text-neutral-400 hover:text-blue-400 transition-colors">
-              [Instagram]
+            <motion.a whileHover={{ y: -2 }} href="https://instagram.com/username-kamu" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-neutral-400 hover:text-blue-400 transition-colors">
+              <SiInstagram className="w-5 h-5" /> Instagram
             </motion.a>
           </div>
         </motion.div>
@@ -316,7 +328,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* View All Projects → arahin ke halaman /projects */}
+        {/* View All Projects */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
