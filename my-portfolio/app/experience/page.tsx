@@ -30,14 +30,14 @@ const experienceData: Record<Category, {
   ],
   organization: [
     {
-      period: "Present",
+      period: "2024",
       title: "Treasurer & Member of Commission III",
       org: "Student Representative Council - Informatics Student Association, UNPAD",
       description: "Managed the financial income and expenditures for the Student Representative Council. Evaluated and audited the financial reports of the Informatics Student Association to ensure transparency and accountability.",
       icon: <Users className="w-5 h-5" />,
     },
     {
-      period: "Volunteer",
+      period: "Volunteer - 2024",
       title: "Fundraising Division Member",
       org: "Gemerlap Orkestra Concert UNPAD",
       description: "Spearheaded fundraising initiatives to support concert operations and served as the primary liaison and contact person for participating event tenants.",
