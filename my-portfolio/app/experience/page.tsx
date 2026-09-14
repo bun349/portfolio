@@ -2,11 +2,16 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Briefcase, GraduationCap, Trophy, Users, HeartHandshake } from "lucide-react";
+import { Briefcase, GraduationCap, Users, HeartHandshake } from "lucide-react";
+import {
+  SiPython, SiReact, SiNextdotjs, SiTailwindcss,
+  SiPytorch, SiTensorflow, SiMysql, SiPostgresql, 
+  SiNodedotjs, SiDocker, SiTypescript, SiJavascript,
+  SiGithub, SiInstagram
+} from "react-icons/si";
 
 type Category = "work" | "organization" | "education";
 
-// TODO: Ganti dengan pengalaman asli kamu
 const experienceData: Record<Category, {
   period: string;
   title: string;
@@ -16,42 +21,42 @@ const experienceData: Record<Category, {
 }[]> = {
   work: [
     {
-      period: "2024 — 2025",
-      title: "Machine Learning Intern",
-      org: "TODO: Company Name",
-      description: "TODO: Describe your role — e.g. built and fine-tuned NLP/CV models, deployed microservices, collaborated with cross-functional teams.",
+      period: "Aug 2025 — Dec 2025",
+      title: "AI Engineer Intern",
+      org: "Pusat Inovasi Pengajaran dan Pembelajaran Universitas Padjadjaran",
+      description: "Developed a Python/FastAPI AI service within a microservices architecture. Fine-tuned IndoBERT for objective evaluation and integrated Google Gemini API (RAG) for virtual patient responses. Implemented parallel processing pipelines using ElevenLabs TTS and Rhubarb Lip Sync.",
       icon: <Briefcase className="w-5 h-5" />,
     },
   ],
   organization: [
     {
-      period: "2023 — 2024",
-      title: "Organization / Community Role",
-      org: "TODO: Organization Name",
-      description: "TODO: Describe your responsibilities and impact within the organization or student community.",
+      period: "Present",
+      title: "Treasurer & Member of Commission III",
+      org: "Student Representative Council - Informatics Student Association, UNPAD",
+      description: "Managed the financial income and expenditures for the Student Representative Council. Evaluated and audited the financial reports of the Informatics Student Association to ensure transparency and accountability.",
       icon: <Users className="w-5 h-5" />,
     },
     {
-      period: "2023",
-      title: "Volunteer Role",
-      org: "TODO: Volunteer Program Name",
-      description: "TODO: Describe your volunteer activities and contribution to the initiative.",
+      period: "Volunteer",
+      title: "Fundraising Division Member",
+      org: "Gemerlap Orkestra Concert UNPAD",
+      description: "Spearheaded fundraising initiatives to support concert operations and served as the primary liaison and contact person for participating event tenants.",
       icon: <HeartHandshake className="w-5 h-5" />,
-    },
-    {
-      period: "2023",
-      title: "Hackathon / Competition Achievement",
-      org: "TODO: Event Name",
-      description: "TODO: Describe the competition, your team's project, and the outcome or award received.",
-      icon: <Trophy className="w-5 h-5" />,
     },
   ],
   education: [
     {
-      period: "2024 — Present",
-      title: "Informatics Engineering Student",
+      period: "Aug 2023 — Aug 2027 (Expected)",
+      title: "Bachelor's Degree in Informatics (Teknik Informatika)",
       org: "Universitas Padjadjaran",
-      description: "Focused on Artificial Intelligence, software architecture, and production-scale system design across ML and full-stack projects.",
+      description: "GPA: 3.75/4.00. Focused on AI integration, full-stack web development, scalable microservices, and translating complex technical challenges into data-driven digital experiences.",
+      icon: <GraduationCap className="w-5 h-5" />,
+    },
+    {
+      period: "Jun 2020 — Jun 2023",
+      title: "High School Student",
+      org: "SMAIT Nurul Fikri Depok",
+      description: "Graduated with a focus on science and foundational mathematics.",
       icon: <GraduationCap className="w-5 h-5" />,
     },
   ],
@@ -69,7 +74,7 @@ function ExperienceCard({ exp, index, isLast }: { exp: typeof experienceData["wo
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.08, duration: 0.4, ease: "easeOut" }}
-      className="relative flex gap-6 group"
+      className="relative flex gap-6 md:gap-8 group"
     >
       <div className="flex flex-col items-center shrink-0">
         <motion.div
@@ -147,8 +152,8 @@ export default function ExperiencePage() {
         })}
       </div>
 
-      {/* Konten per kategori */}
-      <div className="relative pl-2 md:pl-0 min-h-[200px]">
+      {/* Konten per kategori dibatasi lebarnya dan diletakkan di tengah */}
+      <div className="relative max-w-2xl mx-auto min-h-[200px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}

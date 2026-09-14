@@ -4,26 +4,28 @@ import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motio
 import { useRef, useState } from "react";
 import Link from "next/link";
 import {
-  SiPython, SiReact, SiNextdotjs, SiTailwindcss,
-  SiPytorch, SiUnity, SiBlender, SiMysql, SiSupabase, SiNodedotjs,
-  SiGithub, SiInstagram
+  SiPython, SiTypescript, SiReact, SiNextdotjs, SiTailwindcss,
+  SiPytorch, SiTensorflow, SiHuggingface, SiNodedotjs, 
+  SiMysql, SiDocker, SiGit, SiGithub, SiInstagram
 } from "react-icons/si";
 import { Sparkles, Code2, Layers, BrainCircuit, Map, ArrowRight, ExternalLink } from "lucide-react";
 
+// Tech stack yang disortir (Curated): Menampilkan inti dari AI, Full-Stack, dan Tools kamu
 const techStack = [
   { name: "Python", icon: <SiPython className="w-6 h-6" /> },
-  { name: "PyTorch", icon: <SiPytorch className="w-6 h-6" /> },
+  { name: "TypeScript", icon: <SiTypescript className="w-6 h-6" /> },
   { name: "React", icon: <SiReact className="w-6 h-6" /> },
   { name: "Next.js", icon: <SiNextdotjs className="w-6 h-6" /> },
   { name: "Node.js", icon: <SiNodedotjs className="w-6 h-6" /> },
   { name: "Tailwind", icon: <SiTailwindcss className="w-6 h-6" /> },
-  { name: "Supabase", icon: <SiSupabase className="w-6 h-6" /> },
+  { name: "PyTorch", icon: <SiPytorch className="w-6 h-6" /> },
+  { name: "TensorFlow", icon: <SiTensorflow className="w-6 h-6" /> },
+  { name: "Hugging Face", icon: <SiHuggingface className="w-6 h-6" /> },
   { name: "MySQL", icon: <SiMysql className="w-6 h-6" /> },
-  { name: "Unity", icon: <SiUnity className="w-6 h-6" /> },
-  { name: "Blender", icon: <SiBlender className="w-6 h-6" /> },
+  { name: "Docker", icon: <SiDocker className="w-6 h-6" /> },
+  { name: "Git", icon: <SiGit className="w-6 h-6" /> },
 ];
 
-// Komponen Card diubah agar lebih fleksibel menerima elemen "children"
 function HighlightCard({
   title,
   description,
@@ -39,7 +41,7 @@ function HighlightCard({
   tech: string[];
   icon: React.ReactNode;
   index: number;
-  children: React.ReactNode; // <--- Tempat untuk menaruh link yang beda-beda
+  children: React.ReactNode;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const rotateX = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
@@ -123,7 +125,6 @@ function HighlightCard({
           ))}
         </div>
 
-        {/* Link diletakkan di sini, di-render dari komponen induk */}
         <div className="mt-auto">
           {children}
         </div>
@@ -177,14 +178,14 @@ export default function Home() {
           </h1>
 
           <p className="text-base md:text-xl text-neutral-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Translating abstract ideas into intelligent systems, from <span className="text-white font-medium">Machine Learning</span> engineering to <span className="text-white font-medium">Full-Stack Web</span> and <span className="text-white font-medium">Interactive 3D</span> spaces.
+            Turning creative ideas into real, working apps from training <span className="text-white font-medium">Machine Learning</span> models to building <span className="text-white font-medium">Full-Stack Web</span> platforms.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-6 font-mono text-sm">
-            <motion.a whileHover={{ y: -2 }} href="https://github.com/bun1110" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
+            <motion.a whileHover={{ y: -2 }} href="https://github.com/bun349" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-neutral-400 hover:text-emerald-400 transition-colors">
               <SiGithub className="w-5 h-5" /> GitHub
             </motion.a>
-            <motion.a whileHover={{ y: -2 }} href="https://instagram.com/username-kamu" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-neutral-400 hover:text-blue-400 transition-colors">
+            <motion.a whileHover={{ y: -2 }} href="https://instagram.com/bungaadlyna" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-neutral-400 hover:text-blue-400 transition-colors">
               <SiInstagram className="w-5 h-5" /> Instagram
             </motion.a>
           </div>
@@ -201,14 +202,15 @@ export default function Home() {
 
       {/* Bento Grid About Section */}
       <section className="max-w-5xl mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 auto-rows-[250px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[250px]">
 
+          {/* Academics - Dibuat span 3 agar memenuhi row atas karena Workspace dihapus */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ borderColor: "rgba(16,185,129,0.4)" }}
-            className="md:col-span-2 p-8 rounded-3xl bg-neutral-900/40 border border-neutral-800/60 backdrop-blur-sm flex flex-col justify-center relative overflow-hidden group transition-colors"
+            className="md:col-span-3 p-8 rounded-3xl bg-neutral-900/40 border border-neutral-800/60 backdrop-blur-sm flex flex-col justify-center relative overflow-hidden group transition-colors"
           >
             <motion.div
               animate={{ rotate: [0, 8, 0] }}
@@ -218,26 +220,12 @@ export default function Home() {
               <Code2 className="w-32 h-32 text-blue-500" />
             </motion.div>
             <h3 className="text-xs md:text-sm font-mono text-emerald-400 mb-3 tracking-widest uppercase">Academics & Focus</h3>
-            <p className="text-lg md:text-xl text-neutral-300 font-medium leading-relaxed max-w-lg relative z-10">
-              <span className="text-white">Informatics Engineering student at Universitas Padjadjaran</span>, deeply focused on integrating Artificial Intelligence into production-scale software architectures.
+            <p className="text-lg md:text-xl text-neutral-300 font-medium leading-relaxed max-w-2xl relative z-10">
+              <span className="text-white">Informatics Engineering student at Universitas Padjadjaran.</span> I blend full-stack web development with AI to create digital products that actually solve problems
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="rounded-3xl bg-neutral-900 border border-neutral-800/60 overflow-hidden relative group"
-          >
-            <img src="/profile2.jpg" alt="Workspace" className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-neutral-950/20 to-transparent"></div>
-            <div className="absolute bottom-6 left-6 font-mono text-sm text-neutral-300 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Depok, ID
-            </div>
-          </motion.div>
-
+          {/* Multidisciplinary */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -255,10 +243,11 @@ export default function Home() {
             </motion.div>
             <h3 className="text-lg font-bold text-white mb-2">Multidisciplinary</h3>
             <p className="text-neutral-400 text-sm leading-relaxed">
-              Fluent in transitioning between building Web APIs, training Artificial Neural Networks, and assembling nodes in Blender 3D.
+              Flexible and always learning. I'm just as comfortable building full-stack web apps from frontend to backend as I am training AI models.
             </p>
           </motion.div>
 
+          {/* Tech Arsenal */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -266,7 +255,7 @@ export default function Home() {
             transition={{ delay: 0.3 }}
             className="md:col-span-2 rounded-3xl bg-neutral-900/40 border border-neutral-800/60 p-8 flex flex-col justify-center"
           >
-            <h3 className="text-xs md:text-sm font-mono text-emerald-400 mb-6 tracking-widest uppercase">Tech Arsenal</h3>
+            <h3 className="text-xs md:text-sm font-mono text-emerald-400 mb-6 tracking-widest uppercase">Tech Stack</h3>
             <div className="flex flex-wrap gap-3 md:gap-4">
               {techStack.map((tech, i) => (
                 <motion.div
@@ -315,10 +304,6 @@ export default function Home() {
 
         <div className="flex flex-col gap-8 mb-12">
           
-          {/* 
-            PROJECT 1: Commulab 
-            Kamu bisa custom isi tombol link di dalam <HighlightCard> ini
-          */}
           <HighlightCard 
             title="Commulab (Tutor AI)"
             description="Patient counseling simulator with a microservices architecture. Integrates IndoBERT, Gemini API, ElevenLabs TTS, and Rhubarb Lip Sync."
@@ -355,10 +340,6 @@ export default function Home() {
             </div>
           </HighlightCard>
 
-          {/* 
-            PROJECT 2: ARAHIN 
-            Kamu bisa custom isi tombol link yang beda (misal kalau ini cuma ada Github doang)
-          */}
           <HighlightCard 
             title="ARAHIN (Transit Navigation)"
             description="Public transport navigation app (SDG 11.2) with automated Docker Compose and GitHub Actions CI/CD deployment."
