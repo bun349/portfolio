@@ -30,7 +30,7 @@ export default function BackgroundFX() {
 
       {/* Cursor glow (biru → hijau) */}
       <motion.div
-        className="pointer-events-none fixed w-[280px] h-[280px] rounded-full z-0"
+        className="pointer-events-none fixed w-[200px] h-[200px] rounded-full z-0"
         style={{
           left: springX,
           top: springY,
