@@ -23,27 +23,24 @@ const techStack = [
   { name: "Blender", icon: <SiBlender className="w-6 h-6" /> },
 ];
 
-// Project Highlight
-const highlightedProjects = [
-  {
-    title: "Commulab (Tutor AI)",
-    description: "Patient counseling simulator with a microservices architecture. Integrates IndoBERT, Gemini API, ElevenLabs TTS, and Rhubarb Lip Sync.",
-    tech: ["REACT", "NODE.JS", "FASTAPI", "INDOBERT"],
-    icon: <BrainCircuit className="w-6 h-6" />,
-    image: "/assets/projects/commulab.jpg",
-    link: "#", // Placeholder project link
-  },
-  {
-    title: "ARAHIN (Transit Navigation)",
-    description: "Public transport navigation app (SDG 11.2) with automated Docker Compose and GitHub Actions CI/CD deployment.",
-    tech: ["VITE REACT", "EXPRESS", "DOCKER"],
-    icon: <Map className="w-6 h-6" />,
-    image: "/assets/projects/arahin.jpg",
-    link: "#", // Placeholder project link
-  },
-];
-
-function HighlightCard({ project, index }: { project: typeof highlightedProjects[0]; index: number }) {
+// Komponen Card diubah agar lebih fleksibel menerima elemen "children"
+function HighlightCard({
+  title,
+  description,
+  image,
+  tech,
+  icon,
+  index,
+  children
+}: {
+  title: string;
+  description: string;
+  image: string;
+  tech: string[];
+  icon: React.ReactNode;
+  index: number;
+  children: React.ReactNode; // <--- Tempat untuk menaruh link yang beda-beda
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const rotateX = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
   const rotateY = useSpring(useMotionValue(0), { stiffness: 200, damping: 20 });
@@ -91,8 +88,8 @@ function HighlightCard({ project, index }: { project: typeof highlightedProjects
           Project Screenshot
         </div>
         <img
-          src={project.image}
-          alt={project.title}
+          src={image}
+          alt={title}
           className="w-full h-full object-cover relative z-10 group-hover:scale-105 transition-transform duration-700"
           onError={(e) => (e.currentTarget.style.display = "none")}
         />
@@ -101,40 +98,34 @@ function HighlightCard({ project, index }: { project: typeof highlightedProjects
       <div className="w-full md:w-7/12 flex flex-col justify-center h-full relative z-10 py-2">
         <div className="flex justify-between items-start mb-4">
           <h4 className="font-bold text-2xl md:text-3xl text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-emerald-400 transition-all duration-300">
-            {project.title}
+            {title}
           </h4>
           <motion.div
             whileHover={{ scale: 1.1, rotate: 5 }}
             className="p-3 bg-neutral-950 border border-neutral-800 rounded-xl shrink-0 text-emerald-400 group-hover:border-emerald-500/30 transition-colors hidden md:block"
           >
-            {project.icon}
+            {icon}
           </motion.div>
         </div>
 
         <p className="text-neutral-400 text-sm md:text-base leading-relaxed mb-6 max-w-lg">
-          {project.description}
+          {description}
         </p>
 
         <div className="flex flex-wrap gap-2 mb-6">
-          {project.tech.map((tech, i) => (
+          {tech.map((t, i) => (
             <span
               key={i}
               className="px-3 py-1.5 bg-emerald-950/20 text-emerald-400 text-[10px] md:text-xs uppercase tracking-wider font-mono font-semibold rounded-md border border-emerald-900/40 group-hover:border-emerald-500/40 group-hover:bg-emerald-950/40 transition-colors duration-300"
             >
-              {tech}
+              {t}
             </span>
           ))}
         </div>
 
+        {/* Link diletakkan di sini, di-render dari komponen induk */}
         <div className="mt-auto">
-          <a 
-            href={project.link} 
-            target="_blank" 
-            rel="noreferrer" 
-            className="inline-flex items-center gap-2 text-sm font-mono text-neutral-400 hover:text-emerald-400 transition-colors group/link"
-          >
-            View Project <ExternalLink className="w-4 h-4 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
-          </a>
+          {children}
         </div>
       </div>
     </motion.div>
@@ -323,9 +314,79 @@ export default function Home() {
         </motion.div>
 
         <div className="flex flex-col gap-8 mb-12">
-          {highlightedProjects.map((project, index) => (
-            <HighlightCard key={index} project={project} index={index} />
-          ))}
+          
+          {/* 
+            PROJECT 1: Commulab 
+            Kamu bisa custom isi tombol link di dalam <HighlightCard> ini
+          */}
+          <HighlightCard 
+            title="Commulab (Tutor AI)"
+            description="Patient counseling simulator with a microservices architecture. Integrates IndoBERT, Gemini API, ElevenLabs TTS, and Rhubarb Lip Sync."
+            image="/assets/project/Simulasi.png"
+            tech={["REACT", "NODE.JS", "FASTAPI", "INDOBERT"]}
+            icon={<BrainCircuit className="w-6 h-6" />}
+            index={0}
+          >
+            <div className="flex flex-wrap items-center gap-6">
+              <a 
+                href="https://drive.google.com/file/d/1kKGo6uGm_awJIIZZogNZpLbKzPCaJsST/view?usp=sharing" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="inline-flex items-center gap-2 text-sm font-mono text-neutral-400 hover:text-emerald-400 transition-colors group/link"
+              >
+                Live Demo <ExternalLink className="w-4 h-4 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+              </a>
+              <a 
+                href="https://github.com/aipsychotutor/tutor-ai-psy-backend" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="inline-flex items-center gap-2 text-sm font-mono text-neutral-400 hover:text-white transition-colors group/link"
+              >
+                Source Code Backend<SiGithub className="w-4 h-4 group-hover/link:scale-110 transition-transform" />
+              </a>
+               <a 
+                href="https://github.com/aipsychotutor/tutor-ai-psy-frontend" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="inline-flex items-center gap-2 text-sm font-mono text-neutral-400 hover:text-white transition-colors group/link"
+              >
+                Source Code Frontend<SiGithub className="w-4 h-4 group-hover/link:scale-110 transition-transform" />
+              </a>
+            </div>
+          </HighlightCard>
+
+          {/* 
+            PROJECT 2: ARAHIN 
+            Kamu bisa custom isi tombol link yang beda (misal kalau ini cuma ada Github doang)
+          */}
+          <HighlightCard 
+            title="ARAHIN (Transit Navigation)"
+            description="Public transport navigation app (SDG 11.2) with automated Docker Compose and GitHub Actions CI/CD deployment."
+            image="/assets/project/arahin.png"
+            tech={["VITE REACT", "EXPRESS", "DOCKER"]}
+            icon={<Map className="w-6 h-6" />}
+            index={1}
+          >
+            <div className="flex flex-wrap items-center gap-6">
+              <a 
+                href="https://frontend-arahin.vercel.app/" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="inline-flex items-center gap-2 text-sm font-mono text-neutral-400 hover:text-emerald-400 transition-colors group/link"
+              >
+                Live App <ExternalLink className="w-4 h-4 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-transform" />
+              </a>
+              <a 
+                href="https://github.com/Maritzaratnaa/PPL1-HilangArah-2026" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="inline-flex items-center gap-2 text-sm font-mono text-neutral-400 hover:text-white transition-colors group/link"
+              >
+                Source Code <SiGithub className="w-4 h-4 group-hover/link:scale-110 transition-transform" />
+              </a>
+            </div>
+          </HighlightCard>
+
         </div>
 
         {/* View All Projects */}
